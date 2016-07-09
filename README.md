@@ -40,3 +40,22 @@ That's it for now!
 * Flexibility of Docker to quickly spawn up and destroy environments
 * Uploading artifacts to an object store
 * Using existing open source tools and integrating them together without reinventing the wheel
+
+## Let's get started
+* To begin with, git clone this repo.
+
+* Navigate to the `dockertools` directory. This directory will have all the tools that we would need to perform your security related tasks. There is also a `README` in this directory that describes what you would need to do in order to build all tools together or build specific tools only.
+
+*  So, go build those tools first. If you want to try out both nmap and masscan, first ensure you have docker and docker-compose setup, then simply run `docker-compose build` after navigating to the `dockertools` directory. You should see `dockertools_nmap` and `dockertools_masscan` images built in your environment when you type `docker images`.
+
+* If you just build the tools as is, it *should* build just fine. However, the scan reports won't be sent to S3 because obviously you would need to configure that according to your environment. Right now, I have commented out all the parts in the `nmap/Dockerfile`, `masscan/Dockerfile`,  `nmap/scripts/nmapscan.sh` and `masscan/scripts/masscan.sh` files that need to be uncommented if the S3 integration has to work. But, before you uncomment those parts, make sure you update the `s3curl/s3curl.pl` script to add the logic to upload the results to S3 and also provide the S3 creds in the `s3curl/.s3curl` file.
+
+* Once you have the above docker images ready for the nmap and masscan tools, we can start the API server. Remember, the flow that we want to achieve is: 
+
+```API request from a UI or CURL request -> API Server -> Machinery (Rabbitmq -> Worker) -> Use the above Docker images to start containers on the Docker host -> Containers spawn up, scan, upload the scan result to S3 (won't work out of the box unless you configure your S3 environment) -> Containers get destroyed -> scan results from S3 uploaded to a visualization tool (work in progress)```
+
+* 
+
+
+
+

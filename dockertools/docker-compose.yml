@@ -1,0 +1,16 @@
+version: '1'
+services:
+        nmap:
+                hostname: nmap
+                container_name: docker_nmap
+                build:
+                        context: .
+                        dockerfile: nmap/Dockerfile
+                restart: always
+        masscan:
+                hostname: masscan
+                container_name: docker_masscan
+                build:
+                        context: .
+                        dockerfile: masscan/Dockerfile
+                restart: always
