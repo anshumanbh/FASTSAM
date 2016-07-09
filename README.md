@@ -58,6 +58,10 @@ That's it for now!
 
 ![Rabbitmq Logo](/images/rabbitmq.png)
 
+* In order to proceed further, you also need `GO` installed and configured on your workstation. After installing `rabbitmq`, run the `runworker.go` file by typing `go run runworker.go` from the runworker directory in a terminal. This will start a worker connected to the Rabbitmq server as the broker and backend. In this runworker.go file, please take care of the `tasks` import statement depending upon how your GO environment has been configured. I have left a comment there to explain it better. See pic below:
+
+![Runworker Logo](/images/runworker.png)
+
 * 
 
 
