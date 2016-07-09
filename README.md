@@ -32,7 +32,11 @@ Based on the above architecture diagram, the framework would do the following:
 That's it for now! 
 
 ## Key features of this framework
-* It uses security tools as Docker containers. You can build as many tools as you want to and use them as per your requirements.
-* It uses asynchronous processing of tasks that gives more flexibility of running multiple scans by multiple tools on multiple targets.
-* It separates the tooling logic from the main API logic so tools can be built separately and the API can be as light as it can be.
-* It uses Docker which is awesome when you want to run quick tools and destroy the environment when the job is done.
+* API-like framework to perform security testing/scanning activities.
+* Asynchronous processing of tasks that gives more flexibility of running multiple scans by multiple tools on multiple targets.
+* Ability to query the task status using the task ID of a job.
+* Remote Dockerized environment for microservices that can be anything from security tools to visualization tools to triaging tools. You can build as many tools as you want to and use them as per your requirements.
+* Separate tooling logic from the main API logic so tools can be built separately and the API can be as light as it can be.
+* Flexibility of Docker to quickly spawn up and destroy environments
+* Uploading artifacts to an object store
+* Using existing open source tools and integrating them together without reinventing the wheel
