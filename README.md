@@ -12,8 +12,8 @@ Based on the above architecture diagram, the framework would do the following:
 1. Take input from an end user from a UI. This input will be IPs, IP ranges, domains, etc. 
 
 2. Submit a request to an API server with the above input parameters to specific API endpoints. Some examples are:
-		* `POST /api/v1/nmapscan`
-		* `POST /api/v1/masscan`
+		* POST /api/v1/nmapscan
+		* POST /api/v1/masscan
 
 3. This API server would then submit a task in an asynchronous message processing queue. I have used [Machinery](https://github.com/RichardKnop/machinery) for this that uses `Rabbitmq` as the broker/backend and a worker to pick up tasks from the queue and process them asynchronously. 
 
