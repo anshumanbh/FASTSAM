@@ -1,7 +1,7 @@
 # FASTSAM
 ### Framework for Automated Security Testing that is Scaleable and Asynchronous built on Microservices 
 
-![GitHub Logo](/images/Architecture.png)
+![Architecture Logo](/images/Architecture.png)
 
 ## DISCLAIMER
 This is just an idea of how I envision this framework to be built from the ground up. It is still very much a work in progress. I have already started building this with a few key elements up and running. To start with, I am focussing on just automating some basic scanning using nmap and masscan. 
@@ -54,8 +54,11 @@ That's it for now!
 
 ```API request from a UI or CURL request -> API Server -> Machinery (Rabbitmq -> Worker) -> Use the above Docker images to start containers on the Docker host -> Containers spawn up, scan, upload the scan result to S3 (won't work out of the box unless you configure your S3 environment) -> Containers get destroyed -> scan results from S3 uploaded to a visualization tool (work in progress)```
 
-* 
+* You can start the API server remotely but since this is still very much a work in progress, it makes more sense to start the API server locally and test it without having to do it remotely. The first thing you need here is `rabbitmq-server`installed and running on port `5672` locally acting both as broker and result backend. You should be able to connect to it via `amqp://guest:guest@localhost:5672/`. I used `homebrew` on my mac to install this. To start the rabbitmq server, just type `rabbitmq-server`. You should see something like below:
 
+![Rabbitmq Logo](/images/rabbitmq.png)
+
+* 
 
 
 
