@@ -58,11 +58,45 @@ That's it for now!
 
 ![Rabbitmq Logo](/images/rabbitmq.png)
 
-* In order to proceed further, you also need `GO` installed and configured on your workstation. After installing `rabbitmq`, run the `runworker.go` file by typing `go run runworker.go` from the runworker directory in a terminal. This will start a worker connected to the Rabbitmq server as the broker and backend. In this runworker.go file, please take care of the `tasks` import statement depending upon how your GO environment has been configured. I have left a comment there to explain it better. See pic below:
+* In order to proceed further, you also need `GO` installed and configured on your workstation. After installing `rabbitmq`, run the `runworker.go` file (in a separate terminal) by typing `go run runworker.go` from the runworker directory in a terminal. This will start a worker connected to the Rabbitmq server as the broker and backend. In this runworker.go file, please take care of the `tasks` import statement depending upon how your GO environment has been configured. I have left a comment there to explain it better. See pic below:
 
 ![Runworker Logo](/images/runworker.png)
 
-* 
+* Now, run all the remaining *.go files from the `api` directory by navigating to it and typing `go run *.go` (in a separate terminal). This will start our `main.go` file with the router and the API running on port `8080` locally. 
 
+![API Logo](/images/api.png)
+
+* At this point, you are ready to start firing the API requests to the API server. So, in yet another terminal, send a CURL request to our GO API by typing the following CURL commands:
+
+	* `curl -H "Content-Type: application/json" -d '["127.0.0.1","scanme.nmap.org"]' http://localhost:8080/api/v1/nmapscan`.
+	* `curl -H "Content-Type: application/json" -d '["127.0.0.1","10.0.0.0/8"]' http://localhost:8080/api/v1/masscan`.
+
+Remember nmap takes IPs, IP ranges, domains, etc. separated by a whitespace whereas Masscan only takes IPs and IP ranges, that too in a file.
+
+* These requests will immediately submit tasks to the worker (of running nmap and masscan against all these IPs/domains) and return back the task ID which can be used to later query the status of the task. Its a non-blocking asynchronous event. It is important to note here that the endpoint /api/v1/nmapscan and /api/v1/masscan submits these tasks. These tasks (when run) will take the environment of the docker-machine of the terminal where these tasks were called from. So, if you don't have the `dockertools_nmap` and `dockertools_masscan` images running in that docker environment, you might have to build it first. Refer to the dockertools README in order to get more details about building these images. These tasks will be run in the background after getting picked by the worker. Once the tasks finishes, the results will be returned to the worker.
+
+## TODO
+
+- [ ] Write more scanners/tools Dockerfiles and push it to the docker lab so that we can just call those scanners and get our results.
+
+- [ ] Write scanners for websites, subdomain enumerators, etc.
+
+- [ ] The LAIR framework, their drones and even their parsers are written in GO. So, figure out if we can leverage any of that code or use their API to depict all the info in a UI like LAIR does after running our scanners/tools. Also, worth exploring if any of the scan stuff can be depicted in Dradis or Eyewitness or rawr
+
+- [ ] Automate portions after the initial scanning. This is where the main benefit is i.e. automate tasks for pentesting. Explore Gauntlt for this phase for automation test cases.
+
+- [ ] Make modifications for reading IP ranges, XML, text file uploads of IPs and domains to be scanned.
+
+- [ ] Right now, the scans are uploaded in the S3 bucket as a common name. Figure out a way to append something to the filename to be able to distinguish what hosts were scanned when. 
+
+- [ ] Implement authentication and integrate this with a UI frontend. Also, process background AJAX calls to check the status of the tasks submitted to machinery.
+
+- [ ] Change the logic of docker remote API where instead of taking the config from the docker-machine environment of a terminal, it can be provided by a file so that we don't have to rely on the docker-machine env.
+
+- [ ] Move the amqp settings from the code to a .yml file.
+
+- [ ] Figure out a way to keep all the tools/repos uptodate via some docker update mechanism or a cron job of daily pulling fresh images.
+
+- [ ] Writes test cases.
 
 
