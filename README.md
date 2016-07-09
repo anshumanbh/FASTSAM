@@ -64,8 +64,6 @@ That's it for now!
 
 * Now, run all the remaining *.go files from the `api` directory by navigating to it and typing `go run *.go` (in a separate terminal). This will start our `main.go` file with the router and the API running on port `8080` locally. 
 
-![API Logo](/images/api.png)
-
 * At this point, you are ready to start firing the API requests to the API server. So, in yet another terminal, send a CURL request to our GO API by typing the following CURL commands:
 
 	* `curl -H "Content-Type: application/json" -d '["127.0.0.1","scanme.nmap.org"]' http://localhost:8080/api/v1/nmapscan`.
@@ -99,4 +97,7 @@ Remember nmap takes IPs, IP ranges, domains, etc. separated by a whitespace wher
 
 - [ ] Writes test cases.
 
+- [ ] Make this work against a general S3 environment.
+
+- [ ] Add instructions on starting a remote docker host from your local workstation using docker-machine.
 
