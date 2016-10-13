@@ -37,9 +37,9 @@ That's it for now!
 * Ability to query the task status using the task ID of a job.
 * Remote Dockerized environment for microservices that can be anything from security tools to visualization tools to triaging tools. You can build as many tools as you want to and use them as per your requirements.
 * Separate tooling logic from the main API logic so tools can be built separately and the API can be as light as it can be.
-* Flexibility of Docker to quickly spawn up and destroy environments
-* Uploading artifacts to an object store
-* Using existing open source tools and integrating them together without reinventing the wheel
+* Flexibility of Docker to quickly spawn up and destroy environments.
+* Uploading artifacts to an object store.
+* Using existing open source tools and integrating them together without reinventing the wheel.
 
 ## Let's get started
 * To begin with, git clone this repo.
